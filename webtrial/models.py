@@ -8,4 +8,4 @@ class Patient(models.Model):
     modification_date = models.DateTimeField('date published')
     
     def __unicode__(self):
-        return str(self.initials) + ' - ' + str(self.status)
+        return str(self.initials) + ' is ' + str(self.status)
