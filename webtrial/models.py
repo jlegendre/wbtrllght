@@ -1,15 +1,7 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
-
-class Patient(models.Model):
-    initials = models.CharField(max_length=50)
-    status = models.CharField(max_length=200)
-    creation_date = models.DateTimeField('date published')
-    modification_date = models.DateTimeField('date published')
-    
-    def __unicode__(self):
-        return str(self.initials) + ' - ' + str(self.status)
 
 class Center(models.Model):
     center_number = models.CharField(max_length=50)
@@ -18,7 +10,17 @@ class Center(models.Model):
     country = models.CharField(max_length=50)
     
     def __unicode__(self):
-        return str(self.center_name)
+        return self.center_name
+
+class Patient(models.Model):
+    center = models.ForeignKey(Center, default=1)
+    initials = models.CharField(max_length=50)
+    status = models.CharField(max_length=200)
+    creation_date = models.DateTimeField('date published')
+    modification_date = models.DateTimeField('date published')
+    
+    def __unicode__(self):
+        return self.initials + ' - ' + self.status
 
 class Ecrf(models.Model):
     ecrf_name = models.CharField(max_length=50)
@@ -27,6 +29,11 @@ class Ecrf(models.Model):
     theoritical_number_of_patients = models.CharField(max_length=50)
 
     def __unicode__(self):
-        return str(self.ecrf_name)
+        return self.ecrf_name
+
+
+
+
+
 
 
