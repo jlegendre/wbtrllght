@@ -1,12 +1,16 @@
-<h1>{{ question.question_text }}</h1>
+<h1>{{ question.question_text }} {{ question.type }}</h1>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 <form action="{% url 'Forum:vote' question.id %}" method="post">
 {% csrf_token %}
 {% for choice in question.choice_set.all %}
-    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
-    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+    {% if question.type == 'Radio' %}
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+    {% else %}
+        {{ choice }}: <input type="text" name="choice_{{ forloop.counter }}" />
+    {% endif %}
 {% endfor %}
-<input type="submit" value="Vote" />
+<input type="submit" value="Select" />
 </form>
