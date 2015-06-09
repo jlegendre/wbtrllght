@@ -8,10 +8,7 @@ class Patient(models.Model):
 
     def __unicode__(self):
         return self.name + ' [' + str(self.id) + ']'
-        
-    def listReply(self):
-        replies = Reply.objects.filter(patient= self.id)
-        return replies
+
 
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
@@ -27,5 +24,5 @@ class Reply(models.Model):
     reply_text = models.CharField(max_length=200)
     
     def __unicode__(self):
-        return str(self.reply_text) 
+        return self.reply_text
         

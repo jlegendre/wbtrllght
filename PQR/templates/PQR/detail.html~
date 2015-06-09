@@ -4,16 +4,15 @@
     <h1>Patient details : {{ patient }}</h1>    
 </div>
 <fieldset>
-    {% csrf_token %}
+{% block content %}
+  {% for question, replies in questions_list %}
+    <h2><abcd>{{ question }}</abcd>  <h6>{{ question.pub_date }}</h6></h2>
     
-    {% for reply in Replies4MyPatient %}
-    {% if reply == reply %}
-            </br><abcd>{{ reply.question }}</abcd></br>
-            </br>
-                <li>{{ reply }}</li>
-   {% else %}
-   Vide             
-   {% endfor %}
-   
+    {% for reply in replies %}
+      <li>{{ reply }}</li>
+    {% endfor %}
+    
+  {% endfor %}
+{% endblock %}
 <a href="{% url 'list_patient' %}"/> <input type="button" value="Look Back"/>
 </fieldset></br>
