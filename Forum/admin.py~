@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Question, Choice
+from .models import Question, Choice, Reply, Patient
 
 # Register your models here.
 
@@ -11,13 +11,16 @@ class QuestionAdmin(admin.ModelAdmin):
     fieldsets = [
         (None,               {'fields': ['question_text']}),
         ('Date information', {'fields': ['pub_date'], 'classes': ['collapse']}),
-        ('Types',	     {'fields': ['types']}),
+        ('Type',	     {'fields': ['type']}),
     		]
     inlines = [ChoiceInline]
     list_display = ('question_text', 'pub_date')
     list_display = ('question_text', 'pub_date', 'was_published_recently')
-    list_display = ('question_text', 'pub_date', 'was_published_recently', 'types')
+    list_display = ('question_text', 'pub_date', 'was_published_recently', 'type')
     list_filter = ['pub_date']
     search_fields = ['question_text']
 
 admin.site.register(Question, QuestionAdmin)
+admin.site.register(Reply)
+admin.site.register(Patient)
+admin.site.register(Choice)

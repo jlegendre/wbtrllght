@@ -1,0 +1,17 @@
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'Forum/style.css' %}" />
+<center>{{ welcome }}</center>
+
+{% if list_patient %}
+<ul>
+{% for patient in list_patient %}
+    <fieldset>{{ patient }}
+    <a href="/PQR/{{ patient.id }}/patient"> Access</a></li></br>
+    </fieldset>
+{% endfor %}
+</ul>
+{% else %}
+    <p>No Patient are available.</p>
+{% endif %}
+
+<span>Author : J.legendre & N.De Saint Jorre

@@ -1,0 +1,7 @@
+{% for  %}
+      
+        <li>{{ question }} {{ reply }}</li>
+    
+{% endfor %}
+</ul>
+

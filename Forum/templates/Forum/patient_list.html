@@ -1,0 +1,14 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'Forum/style.css' %}" />
+
+{% if latest_patient_list %}
+    <ul>
+    {% for patient in latest_patient_list %}
+        <li>{{ patient }} has ID : <a href="/Forum/patient/{{ patient.id }}">{{ patient.id }}</a></li>
+    {% endfor %}
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    </ul>
+{% else %}
+    <p>No Patient are available.</p>
+{% endif %}

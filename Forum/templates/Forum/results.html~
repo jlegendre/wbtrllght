@@ -7,3 +7,4 @@
 </ul>
 
 <a href="{% url 'Forum:detail' question.id %}">Vote again?</a>
+<a href="/index.html">Exit</a>

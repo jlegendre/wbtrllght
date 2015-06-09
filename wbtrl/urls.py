@@ -21,5 +21,8 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^webtrial/', include('webtrial.urls')),
     url(r'^Forum/', include('Forum.urls', namespace="Forum")),
+    url(r'^PQR/', include('PQR.urls')),
     url(r'^$', include('Forum.urls', namespace="Forum")),
+    
+        
 ]

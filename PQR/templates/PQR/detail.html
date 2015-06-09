@@ -1,0 +1,20 @@
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'Forum/style.css' %}" />
+<div>
+    <h1>Patient details : {{ patient }}</h1>    
+</div>
+<fieldset>
+    {% csrf_token %}
+    
+    {% for reply in Replies4MyPatient %}
+    {% if reply == reply %}
+            </br><abcd>{{ reply.question }}</abcd></br>
+            </br>
+                <li>{{ reply }}</li>
+   {% else %}
+   Vide       
+   {% endif %}      
+   {% endfor %}
+   
+<a href="{% url 'list_patient' %}"/> <input type="button" value="Look Back"/>
+</fieldset></br>

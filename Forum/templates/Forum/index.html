@@ -2,13 +2,44 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'Forum/style.css' %}" />
 
+</div>
+{% for patient in patient_list %}
+<form action="{{ patient.id }}" method="GET">
+    <p>Patient n° {{patient.id}} <a href="patient">{{ patient }}</a></p>
+{% endfor %}
+
 {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}
-        <li><a href="/Forum/{{ question.id }}/">{{ question.question_text }}</a></li>
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<form action="{% url 'Forum:vote' question.id %}" method="post">
+<fieldset>
+        {% csrf_token %}
+        <legend>{{ question.question_text }}</legend>
+        {% for choice in question.choice_set.all %}
+            {% if question.type == 'radio' %}
+                <input type="radio" name="choice" id="choice{{ forloop.counter }}"      value="{{ choice.id }}" />
+                <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+            {% else %}
+                {{ choice }}: <input type="text" name="choice" id="choice{{ forloop.counter }}" value="{{ patient }}" />
+            {% endif %}
+        {% endfor %}
+
+<p style="text-align: center;"><input type="submit" value="Submit"></p>
+</fieldset>
+</form>
         
     {% endfor %}
     </ul>
+
+{% for reply in reply_list %}
+    <p>Question : {{ reply.question }} --->  Réponse : {{ reply }}</p> 
+{% endfor %}
+
+</form>
+
 {% else %}
-    <p>No Forum are available.</p>
+    <p>No Patient are available.</p>
 {% endif %}
+
+

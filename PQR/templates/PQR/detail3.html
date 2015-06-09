@@ -1,0 +1,14 @@
+<div>
+    <h1>Patient details : {{ patient }}</h1>    
+</div>
+
+{% block content %}
+  {% for question in questions_list %}
+    <h2>{{ question }}</h2>
+    <ul>
+    {% for a in question.reply_set.all %}
+      <li>{{ a }}</li>
+    {% endfor %}
+    </ul>
+  {% endfor %}
+{% endblock %}
